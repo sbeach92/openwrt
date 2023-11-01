@@ -278,12 +278,12 @@ function iface_reload_config(phydev, config, old_config)
 		return false;
 
 	let iface = hostapd.interfaces[phy];
+	let iface_name = old_config.bss[0].ifname;
 	if (!iface) {
 		hostapd.printf(`Could not find previous interface ${iface_name}`);
 		return false;
 	}
 
-	let iface_name = old_config.bss[0].ifname;
 	let first_bss = hostapd.bss[iface_name];
 	if (!first_bss) {
 		hostapd.printf(`Could not find bss of previous interface ${iface_name}`);
@@ -571,7 +571,7 @@ function iface_load_config(filename)
 
 	let bss;
 	let line;
-	while ((line = trim(f.read("line"))) != null) {
+	while ((line = rtrim(f.read("line"), "\n")) != null) {
 		let val = split(line, "=", 2);
 		if (!val[0])
 			continue;
@@ -593,7 +593,7 @@ function iface_load_config(filename)
 		push(config.radio.data, line);
 	}
 
-	while ((line = trim(f.read("line"))) != null) {
+	while ((line = rtrim(f.read("line"), "\n")) != null) {
 		if (line == "#default_macaddr")
 			bss.default_macaddr = true;
 
@@ -784,6 +784,7 @@ let main_obj = {
 
 hostapd.data.ubus = ubus;
 hostapd.data.obj = ubus.publish("hostapd", main_obj);
+hostapd.udebug_set("hostapd", hostapd.data.ubus);
 
 function bss_event(type, name, data) {
 	let ubus = hostapd.data.ubus;
@@ -798,6 +799,7 @@ return {
 	shutdown: function() {
 		for (let phy in hostapd.data.config)
 			iface_set_config(phy, null);
+		hostapd.udebug_set(null);
 		hostapd.ubus.disconnect();
 	},
 	bss_add: function(name, obj) {

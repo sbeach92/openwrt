@@ -319,22 +319,47 @@
 					label = "PRODUCTDATA";
 					reg = <0x02b0000 0x0030000>;
 					read-only;
+
+					nvmem-layout {
+						compatible = "fixed-layout";
+						#address-cells = <1>;
+						#size-cells = <1>;
+
+						macaddr_factory_0: macaddr@0 {
+							reg = <0x0 0x6>;
+						};
+
+						macaddr_factory_6: macaddr@6 {
+							reg = <0x6 0x6>;
+						};
+
+						macaddr_PRODUCTDATA_c: macaddr@c {
+							reg = <0xc 0x6>;
+						};
+
+						macaddr_PRODUCTDATA_12: macaddr@12 {
+							reg = <0x12 0x6>;
+						};
+					};
 				};
 
 				partition@2e0000 {
 					label = "ART";
 					reg = <0x02e0000 0x0040000>;
 					read-only;
-					compatible = "nvmem-cells";
-					#address-cells = <1>;
-					#size-cells = <1>;
 
-					precal_ART_1000: precal@1000 {
-						reg = <0x1000 0x2f20>;
-					};
+					nvmem-layout {
+						compatible = "fixed-layout";
+						#address-cells = <1>;
+						#size-cells = <1>;
 
-					precal_ART_5000: precal@5000 {
-						reg = <0x5000 0x2f20>;
+						precal_ART_1000: precal@1000 {
+							reg = <0x1000 0x2f20>;
+						};
+
+						precal_ART_5000: precal@5000 {
+							reg = <0x5000 0x2f20>;
+						};
 					};
 				};
 
@@ -451,13 +476,23 @@
 						reg = <0>;
 						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_WAN;
+						function-enumerator = <1>;
 						default-state = "keep";
 					};
 
 					led@1 {
 						reg = <1>;
-						color = <LED_COLOR_ID_AMBER>;
+						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_WAN;
+						function-enumerator = <2>;
+						default-state = "keep";
+					};
+
+					led@2 {
+						reg = <2>;
+						color = <LED_COLOR_ID_GREEN>;
+						function = LED_FUNCTION_WAN;
+						function-enumerator = <3>;
 						default-state = "keep";
 					};
 				};
@@ -477,13 +512,23 @@
 						reg = <0>;
 						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <1>;
 						default-state = "keep";
 					};
 
 					led@1 {
 						reg = <1>;
-						color = <LED_COLOR_ID_AMBER>;
+						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <2>;
+						default-state = "keep";
+					};
+
+					led@2 {
+						reg = <2>;
+						color = <LED_COLOR_ID_GREEN>;
+						function = LED_FUNCTION_LAN;
+						function-enumerator = <3>;
 						default-state = "keep";
 					};
 				};
@@ -503,13 +548,23 @@
 						reg = <0>;
 						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <1>;
 						default-state = "keep";
 					};
 
 					led@1 {
 						reg = <1>;
-						color = <LED_COLOR_ID_AMBER>;
+						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <2>;
+						default-state = "keep";
+					};
+
+					led@2 {
+						reg = <2>;
+						color = <LED_COLOR_ID_GREEN>;
+						function = LED_FUNCTION_LAN;
+						function-enumerator = <3>;
 						default-state = "keep";
 					};
 				};
@@ -529,13 +584,23 @@
 						reg = <0>;
 						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <1>;
 						default-state = "keep";
 					};
 
 					led@1 {
 						reg = <1>;
-						color = <LED_COLOR_ID_AMBER>;
+						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <2>;
+						default-state = "keep";
+					};
+
+					led@2 {
+						reg = <2>;
+						color = <LED_COLOR_ID_GREEN>;
+						function = LED_FUNCTION_LAN;
+						function-enumerator = <3>;
 						default-state = "keep";
 					};
 				};
@@ -555,13 +620,23 @@
 						reg = <0>;
 						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <1>;
 						default-state = "keep";
 					};
 
 					led@1 {
 						reg = <1>;
-						color = <LED_COLOR_ID_AMBER>;
+						color = <LED_COLOR_ID_GREEN>;
 						function = LED_FUNCTION_LAN;
+						function-enumerator = <2>;
+						default-state = "keep";
+					};
+
+					led@2 {
+						reg = <2>;
+						color = <LED_COLOR_ID_GREEN>;
+						function = LED_FUNCTION_LAN;
+						function-enumerator = <3>;
 						default-state = "keep";
 					};
 				};
@@ -638,28 +713,6 @@
 	fixed-link {
 		speed = <1000>;
 		full-duplex;
-	};
-};
-
-&factory {
-	compatible = "nvmem-cells";
-	#address-cells = <1>;
-	#size-cells = <1>;
-
-	macaddr_factory_0: macaddr@0 {
-		reg = <0x0 0x6>;
-	};
-
-	macaddr_factory_6: macaddr@6 {
-		reg = <0x6 0x6>;
-	};
-
-	macaddr_PRODUCTDATA_c: macaddr@c {
-		reg = <0xc 0x6>;
-	};
-
-	macaddr_PRODUCTDATA_12: macaddr@12 {
-		reg = <0x12 0x6>;
 	};
 };
 

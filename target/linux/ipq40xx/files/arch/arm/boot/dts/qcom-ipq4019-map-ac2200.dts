@@ -91,12 +91,12 @@
 
 &swport4 {
 	status = "okay";
-	label = "wan";
+	label = "lan";
 };
 
 &swport5 {
 	status = "okay";
-	label = "lan";
+	label = "wan";
 };
 
 &wifi0 {

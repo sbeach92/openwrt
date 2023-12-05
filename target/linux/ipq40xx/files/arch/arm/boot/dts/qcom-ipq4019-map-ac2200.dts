@@ -91,13 +91,11 @@
 
 &swport4 {
 	status = "okay";
-	
 	label = "wan";
 };
 
 &swport5 {
 	status = "okay";
-	
 	label = "lan";
 };
 
@@ -126,7 +124,6 @@
 
 		wifi2: wifi@1,0 {
 			compatible = "qcom,ath10k";
-			status = "okay";
 			reg = <0x00010000 0 0 0 0>;
 			qcom,ath10k-calibration-variant = "ASUS-MAP-AC2200";
 			ieee80211-freq-limit = <5170000 5350000>;
